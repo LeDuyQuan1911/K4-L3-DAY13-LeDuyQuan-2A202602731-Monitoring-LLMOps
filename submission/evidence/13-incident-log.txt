@@ -1,0 +1,122 @@
+=== Incident Logs (latency > 2000ms) ===
+
+{
+  "service": "api",
+  "latency_ms": 2654,
+  "ttft_ms": 50,
+  "tokens_in": 34,
+  "tokens_out": 151,
+  "cost_usd": 0.002367,
+  "quality_score": 0.9,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "payload": {
+    "answer_preview": "Starter answer. You should improve this output logic and add better quality chec..."
+  },
+  "event": "response_sent",
+  "user_id_hash": "aae0b94055a9",
+  "feature": "monitoring",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-15ed920e",
+  "session_id": "k4-l3a-challenge-s02",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:45:04.394256Z"
+}
+
+{
+  "service": "api",
+  "latency_ms": 2653,
+  "ttft_ms": 50,
+  "tokens_in": 35,
+  "tokens_out": 83,
+  "cost_usd": 0.00135,
+  "quality_score": 0.8,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "payload": {
+    "answer_preview": "Starter answer. You should improve this output logic and add better quality chec..."
+  },
+  "event": "response_sent",
+  "user_id_hash": "dde2e75b20cf",
+  "feature": "monitoring",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-bd235e1a",
+  "session_id": "k4-l3a-challenge-s01",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:45:07.056496Z"
+}
+
+{
+  "service": "api",
+  "latency_ms": 2653,
+  "ttft_ms": 50,
+  "tokens_in": 35,
+  "tokens_out": 153,
+  "cost_usd": 0.0024,
+  "quality_score": 0.8,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "payload": {
+    "answer_preview": "Starter answer. You should improve this output logic and add better quality chec..."
+  },
+  "event": "response_sent",
+  "user_id_hash": "ed72e61117f6",
+  "feature": "monitoring",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-71e2d060",
+  "session_id": "k4-l3a-challenge-s05",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:45:09.719664Z"
+}
+
+{
+  "service": "api",
+  "latency_ms": 2653,
+  "ttft_ms": 50,
+  "tokens_in": 35,
+  "tokens_out": 85,
+  "cost_usd": 0.00138,
+  "quality_score": 0.8,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "payload": {
+    "answer_preview": "Starter answer. You should improve this output logic and add better quality chec..."
+  },
+  "event": "response_sent",
+  "user_id_hash": "dc9b2ec8da9d",
+  "feature": "monitoring",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-b2e0efbb",
+  "session_id": "k4-l3a-challenge-s03",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:45:12.377068Z"
+}
+
+{
+  "service": "api",
+  "latency_ms": 2653,
+  "ttft_ms": 50,
+  "tokens_in": 36,
+  "tokens_out": 124,
+  "cost_usd": 0.001968,
+  "quality_score": 0.9,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "payload": {
+    "answer_preview": "Starter answer. You should improve this output logic and add better quality chec..."
+  },
+  "event": "response_sent",
+  "user_id_hash": "4570299f37e2",
+  "feature": "monitoring",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-fe5871d6",
+  "session_id": "k4-l3a-challenge-s04",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:45:15.036460Z"
+}
+

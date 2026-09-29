@@ -1,0 +1,9 @@
+=== Incident Metric Evidence ===
+
+Total requests: 15
+Normal requests (<=2000ms): 10, avg=263ms
+Incident requests (>2000ms): 5, avg=2653ms
+Latency spike: ~152ms -> ~2654ms
+Threshold: 2000ms
+Affected feature: monitoring
+Challenge ID: day13-k4-l3a-monitoring-llmops-v1

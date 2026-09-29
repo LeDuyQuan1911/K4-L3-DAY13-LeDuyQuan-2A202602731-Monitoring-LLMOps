@@ -1,0 +1,82 @@
+=== Structured Log Sample (from data/logs.jsonl) ===
+
+{
+  "service": "api",
+  "payload": {
+    "message_preview": "What is your refund policy? My email is [REDACTED_EMAIL]"
+  },
+  "event": "request_received",
+  "user_id_hash": "2055254ee30a",
+  "feature": "qa",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-cee6b22e",
+  "session_id": "s01",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:44:57.544970Z"
+}
+
+{
+  "service": "api",
+  "latency_ms": 1264,
+  "ttft_ms": 50,
+  "tokens_in": 36,
+  "tokens_out": 177,
+  "cost_usd": 0.002763,
+  "quality_score": 0.9,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "payload": {
+    "answer_preview": "Starter answer. You should improve this output logic and add better quality chec..."
+  },
+  "event": "response_sent",
+  "user_id_hash": "2055254ee30a",
+  "feature": "qa",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-cee6b22e",
+  "session_id": "s01",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:44:59.296513Z"
+}
+
+{
+  "service": "api",
+  "payload": {
+    "message_preview": "Explain why metrics traces and logs work together"
+  },
+  "event": "request_received",
+  "user_id_hash": "95b6504a8bd6",
+  "feature": "qa",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-0b9d38c6",
+  "session_id": "s02",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:44:59.306348Z"
+}
+
+{
+  "service": "api",
+  "latency_ms": 153,
+  "ttft_ms": 50,
+  "tokens_in": 32,
+  "tokens_out": 96,
+  "cost_usd": 0.001536,
+  "quality_score": 0.8,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "payload": {
+    "answer_preview": "Starter answer. You should improve this output logic and add better quality chec..."
+  },
+  "event": "response_sent",
+  "user_id_hash": "95b6504a8bd6",
+  "feature": "qa",
+  "model": "claude-sonnet-4-5",
+  "correlation_id": "req-0b9d38c6",
+  "session_id": "s02",
+  "env": "dev",
+  "level": "info",
+  "ts": "2026-09-29T09:44:59.461127Z"
+}
+
