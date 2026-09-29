@@ -109,13 +109,13 @@
 ## 7. Điều tra challenge
 
 - **Challenge ID:** day13-k4-l3a-monitoring-llmops-v1
-- **Khoảng thời gian điều tra:** (Ghi khi chạy challenge chính thức)
-- **Triệu chứng từ metrics:** Latency P95 tăng vọt từ ~160ms lên ~2660ms khi `rag_slow` active
-- **Log line và correlation ID liên quan:** (Ghi correlation_id cụ thể từ log khi chạy challenge)
-- **Trace ID và span gây ảnh hưởng:** (Ghi trace ID từ Langfuse — span `retriever` có duration ~2500ms)
-- **Root cause:** Retrieval (vector store) bị slow — `time.sleep(2.5)` khi `STATE["rag_slow"]` active
-- **Fix action:** Disable incident `rag_slow` qua API `/incidents/rag_slow/disable`
-- **Preventive measure:** Đặt timeout cho retrieval, thêm circuit breaker, monitor retrieval latency riêng biệt
+- **Khoảng thời gian điều tra:** 2026-09-29T09:45:00Z — 2026-09-29T09:45:16Z
+- **Triệu chứng từ metrics:** Latency P95 tăng vọt từ ~153ms (baseline) lên ~2654ms (challenge). Tất cả 5 challenge requests đều vượt threshold 2000ms. Feature bị ảnh hưởng: `monitoring`.
+- **Log line và correlation ID liên quan:** `req-15ed920e` (latency=2654ms, feature=monitoring, session=k4-l3a-challenge-s02, ts=2026-09-29T09:45:04Z). Tất cả 5 requests challenge đều có latency ~2653ms: req-15ed920e, req-bd235e1a, req-71e2d060, req-b2e0efbb, req-fe5871d6.
+- **Trace ID và span gây ảnh hưởng:** Tìm trace có correlation_id=req-15ed920e trên Langfuse. Span `retriever` có duration ~2500ms (chiếm 94% tổng latency), trong khi span `fake-llm-generation` chỉ ~153ms. Bottleneck rõ ràng ở retrieval.
+- **Root cause:** `rag_slow` incident active — hàm `retrieve()` trong `app/mock_rag.py` gọi `time.sleep(2.5)` khi `STATE["rag_slow"]` = True, mô phỏng vector store timeout/chậm.
+- **Fix action:** Disable incident qua API: `POST /incidents/rag_slow/disable`. Sau đó latency trở về baseline ~153ms.
+- **Preventive measure:** (1) Đặt timeout cho retrieval call (e.g. 1s), (2) thêm circuit breaker pattern cho vector store dependency, (3) monitor retrieval latency riêng biệt với alert khi P95 > 500ms, (4) có fallback response khi retrieval timeout.
 
 ## 8. Giải thích và tự đánh giá
 
