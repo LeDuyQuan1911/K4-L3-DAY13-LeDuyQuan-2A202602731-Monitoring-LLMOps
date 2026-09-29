@@ -4,13 +4,13 @@
 
 ## 1. Thông tin học viên
 
-- **Họ và tên:** (Điền tên)
-- **MSSV:** (Điền MSSV)
+- **Họ và tên:** Lê Duy Quân
+- **MSSV:** 2A202602731
 - **Lớp:** K4-L3A
-- **Repository URL:** (Điền URL repo GitHub cá nhân)
+- **Repository URL:** https://github.com/LeDuyQuan1911/K4-L3-DAY13-LeDuyQuan-2A202602731-Monitoring-LLMOps
 - **Commit SHA cuối:** (Điền sau khi commit)
 - **Challenge ID:** day13-k4-l3a-monitoring-llmops-v1
-- **Tên project Langfuse cá nhân:** `day13-k4-l3a-<MSSV>`
+- **Tên project Langfuse cá nhân:** `day13-k4-l3a-2A202602731`
 
 ## 2. Evidence index
 
