@@ -51,7 +51,10 @@ class LabAgent:
             },
         ):
             started = time.perf_counter()
-            docs = retrieve(message)
+
+            # Instrumented retrieval as child span
+            docs = self._retrieve_with_span(langfuse_client, message)
+
             prompt = resolve_prompt(
                 langfuse_client,
                 feature=feature,
@@ -71,10 +74,13 @@ class LabAgent:
                 },
                 version=prompt.version,
             )
-            # TODO (CP2): instrument retrieve() and FakeLLM.generate() as child
-            # observations. The nested generation must receive prompt, usage and cost.
+
+            # Instrumented generation as child observation with prompt, usage & cost
             with propagate_attributes(prompt=prompt.managed_prompt):
-                response = self.llm.generate(prompt.text)
+                response = self._generate_with_span(
+                    langfuse_client, prompt.text, prompt
+                )
+
             quality_score = self._heuristic_quality(message, response.text, docs)
             latency_ms = int((time.perf_counter() - started) * 1000)
             cost_usd = self._estimate_cost(response.usage.input_tokens, response.usage.output_tokens)
@@ -97,6 +103,46 @@ class LabAgent:
             cost_usd=cost_usd,
             quality_score=quality_score,
         )
+
+    @observe(name="retriever", as_type="span", capture_input=False, capture_output=False)
+    def _retrieve_with_span(self, langfuse_client, message: str) -> list[str]:
+        """Retrieve documents with Langfuse span instrumentation."""
+        docs = retrieve(message)
+        langfuse_client.update_current_span(
+            metadata={
+                "doc_count": len(docs),
+                "query_preview": summarize_text(message),
+            },
+        )
+        return docs
+
+    @observe(name="fake-llm-generation", as_type="generation", capture_input=False, capture_output=False)
+    def _generate_with_span(self, langfuse_client, prompt_text: str, prompt_info):
+        """Generate LLM response with Langfuse generation instrumentation."""
+        response = self.llm.generate(prompt_text)
+        cost_usd = self._estimate_cost(
+            response.usage.input_tokens, response.usage.output_tokens
+        )
+        langfuse_client.update_current_generation(
+            model=self.model,
+            model_parameters={"temperature": 0.7},
+            usage_details={
+                "input": response.usage.input_tokens,
+                "output": response.usage.output_tokens,
+                "total": response.usage.input_tokens + response.usage.output_tokens,
+            },
+            cost_details={
+                "total": cost_usd,
+            },
+            metadata={
+                "prompt_name": prompt_info.name,
+                "prompt_version": prompt_info.version,
+                "prompt_label": prompt_info.label,
+                "ttft_ms": response.ttft_ms,
+                "cost_usd": cost_usd,
+            },
+        )
+        return response
 
     def _estimate_cost(self, tokens_in: int, tokens_out: int) -> float:
         input_cost = (tokens_in / 1_000_000) * 3
